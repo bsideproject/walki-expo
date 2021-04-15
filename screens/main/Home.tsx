@@ -1,11 +1,25 @@
+import { useNavigation } from "@react-navigation/core";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  MainStackParamList,
+  "MainTabs"
+>;
 
 const HomeScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <SafeAreaView>
+      <TouchableOpacity onPress={() => navigation.navigate("SettingStack")}>
+        <View>
+          <Text>HomeScreen</Text>
+        </View>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
 

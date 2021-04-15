@@ -6,7 +6,7 @@ import RankingScreen from "../screens/main/Ranking";
 
 const Tabs = createBottomTabNavigator();
 
-export const MainNav = () => {
+export const MainTabs = () => {
   return (
     <Tabs.Navigator>
       <Tabs.Screen name="Home" component={HomeScreen} />

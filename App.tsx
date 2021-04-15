@@ -3,8 +3,8 @@ import { ThemeProvider } from "@emotion/react";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useState } from "react";
 import { client, isLoggedInVar } from "./common/apollo";
-import { AuthNav } from "./navigators/AuthNav";
-import { MainNav } from "./navigators/MainNav";
+import { AuthStack } from "./navigators/AuthStack";
+import { MainStack } from "./navigators/MainStack";
 import { theme } from "./styles/theme";
 import AppLoading from "expo-app-loading";
 
@@ -29,7 +29,7 @@ const App = () => {
     <ThemeProvider theme={theme.toki}>
       <ApolloProvider client={client}>
         <NavigationContainer>
-          {isLoggedIn ? <MainNav /> : <AuthNav />}
+          {true ? <MainStack /> : <AuthStack />}
         </NavigationContainer>
       </ApolloProvider>
     </ThemeProvider>

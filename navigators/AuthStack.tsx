@@ -8,7 +8,7 @@ import FinishScreen from "../screens/auth/Finish";
 
 const Stack = createStackNavigator();
 
-export const AuthNav = () => {
+export const AuthStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Onboarding" component={OnboardingScreen} />
