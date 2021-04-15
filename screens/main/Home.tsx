@@ -1,26 +1,48 @@
-import { useNavigation } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-type HomeScreenNavigationProp = StackNavigationProp<
-  MainStackParamList,
-  "MainTabs"
->;
+import styled from "@emotion/native";
+import { SafeLayout } from "../../layouts/SafeLayout";
+import { Header } from "../../components/Home/Header";
+import { Info } from "../../components/Home/Info";
+import { CircularProgress } from "../../components/Home/CircularProgress";
+import { Button } from "../../components/Button";
 
 const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
-
   return (
-    <SafeAreaView>
-      <TouchableOpacity onPress={() => navigation.navigate("SettingStack")}>
-        <View>
-          <Text>HomeScreen</Text>
-        </View>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <SafeLayout>
+      <Header />
+      <Body>
+        <Info />
+        <CircularProgress />
+        <TextContainer>
+          <Text>조금만 더 힘내시면 목표에 도달할 수 있어요!</Text>
+        </TextContainer>
+        <ButtonContainer>
+          <Button text="오늘은 그만할래요" type="secondary" />
+        </ButtonContainer>
+      </Body>
+    </SafeLayout>
   );
 };
 
 export default HomeScreen;
+
+const Body = styled.View`
+  flex: 1;
+  padding: 0px 16px;
+`;
+
+const TextContainer = styled.View`
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 20px;
+`;
+
+const Text = styled.Text`
+  font-size: 16px;
+
+  color: ${props => props.theme.color.gray2};
+`;
+
+const ButtonContainer = styled.View`
+  padding: 0px 36px;
+`;
