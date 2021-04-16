@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <Container>
       <Left />
-      <Center>2021년 2월 리포트</Center>
+      <Center>랭킹</Center>
       <Right>
         <SvgXml xml={icons.setting} />
       </Right>
