@@ -4,6 +4,15 @@ const setting = `<svg width="30" height="28" viewBox="0 0 30 28" fill="none" xml
 </svg>
 `;
 
+const left = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 19L8 12L16 5" stroke="#4F4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+const right = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 19L16 12L8 5" stroke="#4F4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
 const clearsky = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M23.0001 15.9995C23.0001 19.8655 19.8661 22.9995 16.0001 22.9995C12.1341 22.9995 9.00012 19.8655 9.00012 15.9995C9.00012 12.1335 12.1341 8.99951 16.0001 8.99951C19.8661 8.99951 23.0001 12.1335 23.0001 15.9995Z" stroke="#F2994A" stroke-width="2"/>
 <path d="M22.3636 15.9999C22.3636 19.5144 19.5145 22.3635 16 22.3635C12.4855 22.3635 9.63635 19.5144 9.63635 15.9999C9.63635 12.4853 12.4855 9.63623 16 9.63623C19.5145 9.63623 22.3636 12.4853 22.3636 15.9999Z" fill="#FFB900"/>
@@ -49,6 +58,10 @@ const thunderstrom = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none
 
 export const icons = {
   setting,
+  chevron: {
+    left,
+    right,
+  },
   weather: {
     clearsky,
     cloud,

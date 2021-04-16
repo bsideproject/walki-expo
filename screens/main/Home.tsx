@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/native";
 import { SafeLayout } from "../../layouts/SafeLayout";
-import { Header } from "../../components/Home/Header";
-import { Info } from "../../components/Home/Info";
-import { CircularProgress } from "../../components/Home/CircularProgress";
+import { Header } from "../../components/Main/Home/Header";
+import { Info } from "../../components/Main/Home/Info";
+import { CircularProgress } from "../../components/Main/Home/CircularProgress";
 import { Button } from "../../components/Button";
 
 const HomeScreen = () => {

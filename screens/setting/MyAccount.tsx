@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "../../components/Setting/Header";
 
 const MyAccountScreen = () => {
   return (
-    <View>
-      <Text>MyAccountScreen</Text>
-    </View>
+    <SafeAreaView>
+      <Header hasBack />
+    </SafeAreaView>
   );
 };
 

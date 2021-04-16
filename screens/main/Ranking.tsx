@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/native";
 import { SafeLayout } from "../../layouts/SafeLayout";
-import { Header } from "../../components/Ranking/Header";
-import { MyRanking } from "../../components/Ranking/MyRanking";
-import { TopRanking } from "../../components/Ranking/TopRanking";
+import { Header } from "../../components/Main/Ranking/Header";
+import { MyRanking } from "../../components/Main/Ranking/MyRanking";
+import { TopRanking } from "../../components/Main/Ranking/TopRanking";
 
 const RankingScreen = () => {
   return (
@@ -27,4 +27,5 @@ const Container = styled.View`
 
 const MyRankingContainer = styled.View`
   padding: 16px;
+  padding-top: 0px;
 `;

@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react";
 import styled from "@emotion/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { theme } from "../../styles/theme";
+import { theme } from "../../../styles/theme";
 import { SvgXml } from "react-native-svg";
-import { images } from "../../styles/images";
+import { images } from "../../../styles/images";
 
 export const CircularProgress = () => {
   const [activedStep, setActivedStep] = useState(false);

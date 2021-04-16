@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/native";
 import { SvgXml } from "react-native-svg";
-import { icons } from "../../styles/icons";
+import { icons } from "../../../styles/icons";
 import dayjs from "dayjs";
 
 export const Info = () => {

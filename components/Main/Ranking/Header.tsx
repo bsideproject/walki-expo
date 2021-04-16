@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/native";
-import { SvgXml } from "react-native-svg";
-import { icons } from "../../styles/icons";
+import { SettingIcon } from "../SettingIcon";
 
 export const Header = () => {
   return (
@@ -9,7 +8,7 @@ export const Header = () => {
       <Left />
       <Center>랭킹</Center>
       <Right>
-        <SvgXml xml={icons.setting} />
+        <SettingIcon />
       </Right>
     </Container>
   );

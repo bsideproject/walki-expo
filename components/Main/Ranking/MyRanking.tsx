@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/native";
 import { RankBox } from "./RankBox";
 import { SvgXml } from "react-native-svg";
-import { images } from "../../styles/images";
+import { images } from "../../../styles/images";
 
 export const MyRanking = () => {
   return (

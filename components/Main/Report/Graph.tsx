@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from '@emotion/native';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { theme } from '../../styles/theme';
+import React from "react";
+import styled from "@emotion/native";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { theme } from "../../../styles/theme";
 
 export const Graph = () => {
   return (
@@ -27,7 +27,8 @@ export const Graph = () => {
             rotation={0}
             lineCap="round"
             fill={70}
-            duration={2000}>
+            duration={2000}
+          >
             {() => (
               <AnimatedCircularProgress
                 size={86}
@@ -37,7 +38,8 @@ export const Graph = () => {
                 rotation={0}
                 lineCap="round"
                 fill={70}
-                duration={2000}>
+                duration={2000}
+              >
                 {() => (
                   <AnimatedCircularProgress
                     size={50}
@@ -69,7 +71,7 @@ const Title = styled.Text`
   font-size: 16px;
   line-height: 18px;
 
-  color: ${(props) => props.theme.color.gray2};
+  color: ${props => props.theme.color.gray2};
 
   margin-bottom: 16px;
 `;
@@ -78,7 +80,7 @@ const GraphContainer = styled.View`
   padding: 16px;
   border-radius: 16px;
 
-  background-color: ${(props) => props.theme.color.white};
+  background-color: ${props => props.theme.color.white};
 
   flex-direction: row;
   justify-content: space-between;
@@ -92,7 +94,7 @@ const InfoTitle = styled.Text`
   font-size: 12px;
   line-height: 14px;
 
-  color: ${(props) => props.theme.color.gray1};
+  color: ${props => props.theme.color.gray1};
 `;
 
 const StepContent = styled.Text`

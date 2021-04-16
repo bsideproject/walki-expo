@@ -7,6 +7,7 @@ import { AuthStack } from "./navigators/AuthStack";
 import { MainStack } from "./navigators/MainStack";
 import { theme } from "./styles/theme";
 import AppLoading from "expo-app-loading";
+import { Platform, StatusBar } from "react-native";
 
 const App = () => {
   // const [loading, setLoading] = useState(true);
@@ -29,6 +30,7 @@ const App = () => {
     <ThemeProvider theme={theme.toki}>
       <ApolloProvider client={client}>
         <NavigationContainer>
+          <StatusBar hidden={Platform.OS === "android"} />
           {true ? <MainStack /> : <AuthStack />}
         </NavigationContainer>
       </ApolloProvider>

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "@emotion/native";
 import { SvgXml } from "react-native-svg";
-import { icons } from "../../styles/icons";
-import { images } from "../../styles/images";
+import { images } from "../../../styles/images";
+import { SettingIcon } from "../SettingIcon";
 
 export const Header = () => {
   return (
@@ -11,7 +11,7 @@ export const Header = () => {
         <SvgXml xml={images.logo} />
       </Left>
       <Right>
-        <SvgXml xml={icons.setting} />
+        <SettingIcon />
       </Right>
     </Container>
   );

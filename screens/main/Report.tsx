@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "@emotion/native";
 import { SafeLayout } from "../../layouts/SafeLayout";
-import { Header } from "../../components/Report/Header";
-import { Graph } from "../../components/Report/Graph";
-import { ReportList } from "../../components/Report/ReportList";
+import { Header } from "../../components/Main/Report/Header";
+import { Graph } from "../../components/Main/Report/Graph";
+import { ReportList } from "../../components/Main/Report/ReportList";
 
 const ReportScreen = () => {
   return (

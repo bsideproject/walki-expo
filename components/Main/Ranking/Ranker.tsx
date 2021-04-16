@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/native";
 import { SvgXml } from "react-native-svg";
-import { images } from "../../styles/images";
+import { images } from "../../../styles/images";
 
 export const Ranker = () => {
   return (
