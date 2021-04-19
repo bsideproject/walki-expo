@@ -8,10 +8,12 @@ import { MainStack } from "./navigators/MainStack";
 import { theme } from "./styles/theme";
 import AppLoading from "expo-app-loading";
 import { Platform, StatusBar } from "react-native";
+import { MainTabNavi } from "./navigators/MainTabNavi";
+import { AuthStackNavi } from "./navigators/AuthStackNavi";
 
 const App = () => {
   // const [loading, setLoading] = useState(true);
-  // const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
 
   // const preload = async () => {};
   // const onFinish = () => setLoading(false);
@@ -31,7 +33,7 @@ const App = () => {
       <ApolloProvider client={client}>
         <NavigationContainer>
           <StatusBar hidden={Platform.OS === "android"} />
-          {true ? <MainStack /> : <AuthStack />}
+          {isLoggedIn ? <MainTabNavi /> : <AuthStackNavi />}
         </NavigationContainer>
       </ApolloProvider>
     </ThemeProvider>
