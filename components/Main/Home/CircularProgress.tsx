@@ -5,7 +5,15 @@ import { theme } from "../../../styles/theme";
 import { SvgXml } from "react-native-svg";
 import { images } from "../../../styles/images";
 
-export const CircularProgress = () => {
+interface ICircularProgressProps {
+  currentStepCount: number;
+  maxStepCount: number;
+}
+
+export const CircularProgress: React.VFC<ICircularProgressProps> = ({
+  currentStepCount,
+  maxStepCount,
+}) => {
   const [activedStep, setActivedStep] = useState(false);
 
   const toggleActivedStep = useCallback(() => {
@@ -21,7 +29,7 @@ export const CircularProgress = () => {
         backgroundColor={theme.toki.color.gray5}
         rotation={0}
         lineCap="round"
-        fill={70}
+        fill={(currentStepCount / maxStepCount) * 100}
         tintColorSecondary={theme.toki.color.main}
         duration={2000}
       >
@@ -34,8 +42,8 @@ export const CircularProgress = () => {
               {activedStep && (
                 <Step onPress={toggleActivedStep}>
                   <StepContainer>
-                    <StepText>2,504</StepText>
-                    <MaxStepText>10,000 걸음</MaxStepText>
+                    <StepText>{currentStepCount}</StepText>
+                    <MaxStepText>목표 {maxStepCount} 걸음</MaxStepText>
                   </StepContainer>
                 </Step>
               )}

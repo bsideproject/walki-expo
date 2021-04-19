@@ -4,12 +4,16 @@ import { SvgXml } from "react-native-svg";
 import { icons } from "../../../styles/icons";
 import dayjs from "dayjs";
 
-export const Info = () => {
+interface IInfoProps {
+  currentDate: Date;
+}
+
+export const Info: React.VFC<IInfoProps> = ({ currentDate }) => {
   return (
     <>
       <CurrentDate>
         <CurrentDateText>
-          {dayjs(new Date()).format("MM월 DD일 HH:mm")}
+          {dayjs(currentDate).format("MM월 DD일 HH:mm")}
         </CurrentDateText>
       </CurrentDate>
       <Container>
@@ -46,7 +50,7 @@ const Container = styled.View`
 
   border-radius: 16px;
 
-  margin-bottom: 20px;
+  margin-bottom: 32px;
 `;
 
 const ItemContainer = styled.View`
