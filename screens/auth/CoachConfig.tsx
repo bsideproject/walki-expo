@@ -1,9 +1,10 @@
-import React from 'react';
-import CoachContainer from '../../containers/auth/Coach';
-import { IAuthProps } from '../../navigators/AuthStackNavi';
+import React from "react";
+import CoachContainer from "../../components/Auth/CoachContainer";
+
+import { IAuthProps } from "../../navigators/AuthStackNavi";
 
 const CoachConfigScreen = ({ navigation }: IAuthProps) => {
-  return <CoachContainer goNext={() => navigation.push('Challenge')} />;
+  return <CoachContainer goNext={() => navigation.push("Challenge")} />;
 };
 
 export default CoachConfigScreen;

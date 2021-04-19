@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import StartContainer from "../../components/Auth/StartContainer";
 
-import StartContainer from '../../containers/auth/Start';
-import { IAuthProps } from '../../navigators/AuthStackNavi';
+import { IAuthProps } from "../../navigators/AuthStackNavi";
 
 const StartScreen = ({ navigation }: IAuthProps) => {
-  return <StartContainer goNext={() => navigation.push('Home')} />;
+  return <StartContainer goNext={() => navigation.push("Home")} />;
 };
 
 export default StartScreen;

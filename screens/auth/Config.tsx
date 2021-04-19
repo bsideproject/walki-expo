@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
+import ConfigContainer from "../../components/Auth/ConfigContainer";
 
-import ConfigContainer from '../../containers/auth/Config';
-import { IAuthProps } from '../../navigators/AuthStackNavi';
+import { IAuthProps } from "../../navigators/AuthStackNavi";
 
 /**
  * 초기설정
  * @param goNext
  */
 const ConfigScreen = ({ navigation }: IAuthProps) => {
-  return <ConfigContainer goNext={() => navigation.push('Coach')} />;
+  return <ConfigContainer goNext={() => navigation.push("Coach")} />;
 };
 
 export default ConfigScreen;

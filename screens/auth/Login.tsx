@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import GuideContainer from '../../containers/auth/Guide';
-import LoginContainer from '../../containers/auth/Login';
-import { IAuthProps } from '../../navigators/AuthStackNavi';
+import React, { useState } from "react";
+import GuideContainer from "../../components/Auth/GuideContainer";
+import LoginContainer from "../../components/Auth/LoginContainer";
+
+import { IAuthProps } from "../../navigators/AuthStackNavi";
 
 const LoginScreen = ({ navigation }: IAuthProps) => {
   const [currIndex, setCurrIndex] = useState(0);
@@ -9,7 +10,7 @@ const LoginScreen = ({ navigation }: IAuthProps) => {
     <>
       <GuideContainer currIndex={currIndex} setCurrIndex={setCurrIndex} />
       {currIndex === 2 && (
-        <LoginContainer goNext={() => navigation.push('Config')} />
+        <LoginContainer goNext={() => navigation.push("Config")} />
       )}
     </>
   );

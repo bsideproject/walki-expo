@@ -20,7 +20,7 @@ export const AuthStackNavi = () => {
   const CommonHeader = {
     headerLeft: (props: StackHeaderLeftButtonProps) => (
       <View style={{ paddingLeft: 18 }}>
-        <ChevronLeft width={24} height={24} onPress={props.onPress} />
+        {/* <ChevronLeft width={24} height={24} onPress={props.onPress} /> */}
       </View>
     ),
   };
