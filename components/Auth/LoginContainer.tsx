@@ -4,21 +4,15 @@ import { Alert, Text } from "react-native";
 import { INaviProps } from "../../navigators/AuthStackNavi";
 import TextLink from "../../components/TextLink";
 import LoginButton from "./LoginButton";
+import { useQuery } from "@apollo/client";
+import { GET_TOKEN_QUERY } from "../../queries";
+import {
+  getToken,
+  getToken_signIn,
+  getTokenVariables,
+} from "../../__generated__/getToken";
+import { Social } from "../../__generated__/globalTypes";
 
-// import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
-// import { appleAuth } from "@invertase/react-native-apple-authentication";
-interface SignInResult {
-  accessToken: String;
-}
-
-interface SignInVars {
-  social: Social;
-  token: String;
-}
-enum Social {
-  APPLE,
-  KAKAO,
-}
 
 /**
  * 로그인 버튼
@@ -26,43 +20,16 @@ enum Social {
  * @param setCurrIndex
  */
 const LoginContainer = ({ goNext }: INaviProps) => {
-  //   const { loading, data } = useQuery<SignInResult, SignInVars>(
-  //     GET_ACCESS_TOKEN,
-  //     { variables: { social: Social.KAKAO, token: "0" } }
-  //   );
-  //   useEffect(() => {
-  //     console.log("GET_ACCESS_TOKEN", data);
-  //   }, [data]);
-  //   const onPressKakaoLogin = useCallback(async (): Promise<void> => {
-  //     const token: KakaoOAuthToken = await login();
-  //     console.log("user is authenticated", token);
-  //     if (typeof goNext === "function" && token) goNext();
-  //   }, []);
+  const { data ,loading} = useQuery<getToken, getTokenVariables>(GET_TOKEN_QUERY, {
+    variables: {
+      social:Social.APPLE, token:'0'
+    },
+  });
 
-  //   const onAppleButtonPress = useCallback(async () => {
-  //     try {
-  //       // Start the sign-in request
-  //       const appleAuthRequestResponse = await appleAuth.performRequest({
-  //         requestedOperation: appleAuth.Operation.LOGIN,
-  //         requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-  //       });
-  //       // get current authentication state for user
-  //       const credentialState = await appleAuth.getCredentialStateForUser(
-  //         appleAuthRequestResponse.user
-  //       );
-  //       // use credentialState response to ensure the user is authenticated
-  //       if (credentialState === appleAuth.State.AUTHORIZED) {
-  //         console.log("user is authenticated", appleAuthRequestResponse);
-  //         if (typeof goNext === "function") goNext();
-  //       }
-  //     } catch (error) {
-  //       if (error.code === appleAuth.Error.CANCELED) {
-  //         // login canceled
-  //       } else {
-  //         // login error
-  //       }
-  //     }
-  //   }, []);
+  useEffect(() => {
+    console.log("GET_ACCESS_TOKEN", data);
+  }, [data]);
+  
 
   return (
     <BottomContainer>
