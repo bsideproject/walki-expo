@@ -4,6 +4,7 @@ import {
   StackHeaderLeftButtonProps,
   StackNavigationProp,
 } from "@react-navigation/stack";
+import { View } from "react-native";
 import { MainTabNavi } from "./MainTabNavi";
 import LoginScreen from "../screens/auth/Login";
 import ConfigScreen from "../screens/auth/Config";
@@ -11,8 +12,8 @@ import CoachConfigScreen from "../screens/auth/CoachConfig";
 import ChallengeConfigScreen from "../screens/auth/ChallengeConfig";
 import AlarmConfigScreen from "../screens/auth/AlarmConfig";
 import StartScreen from "../screens/auth/Start";
-import ChevronLeft from "../assets/icons/chevron/left.svg";
-import { View } from "react-native";
+import { SvgXml } from "react-native-svg";
+import { icons } from "../styles/icons";
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ export const AuthStackNavi = () => {
   const CommonHeader = {
     headerLeft: (props: StackHeaderLeftButtonProps) => (
       <View style={{ paddingLeft: 18 }}>
-        {/* <ChevronLeft width={24} height={24} onPress={props.onPress} /> */}
+        <SvgXml xml={icons.chevron.left} />
       </View>
     ),
   };

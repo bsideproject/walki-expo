@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
 import styled from "@emotion/native";
 import { Alert, Text } from "react-native";
-
-import TextLink from "../../components/TextLink";
 import { INaviProps } from "../../navigators/AuthStackNavi";
+import TextLink from "../../components/TextLink";
 import LoginButton from "./LoginButton";
+
 // import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
 // import { appleAuth } from "@invertase/react-native-apple-authentication";
 interface SignInResult {
@@ -20,14 +19,6 @@ enum Social {
   APPLE,
   KAKAO,
 }
-const GET_ACCESS_TOKEN = gql`
-  query getToken($social: Social!, $token: String!) {
-    signIn(social: $social, token: $token) {
-      accessToken
-      __typename
-    }
-  }
-`;
 
 /**
  * 로그인 버튼
