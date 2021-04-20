@@ -1,4 +1,6 @@
-declare module '@emotion/react' {
+import { Dimensions } from "react-native";
+
+declare module "@emotion/react" {
   export interface Theme {
     color: {
       main: string;
@@ -24,27 +26,27 @@ declare module '@emotion/react' {
 }
 
 const grayScale = {
-  black: '#000000',
-  gray1: '#333333',
-  gray2: '#4f4f4f',
-  gray3: '#828282',
-  gray4: '#bdbdbd',
-  gray5: '#e0e0e0',
-  gray6: '#f2f2f2',
-  white: '#ffffff',
+  black: "#000000",
+  gray1: "#333333",
+  gray2: "#4f4f4f",
+  gray3: "#828282",
+  gray4: "#bdbdbd",
+  gray5: "#e0e0e0",
+  gray6: "#f2f2f2",
+  white: "#ffffff",
 };
 
 const toki = {
   color: {
-    main: '#f22764',
-    sub: '#f8638b',
+    main: "#f22764",
+    sub: "#f8638b",
     character: {
-      main: '#f2aacb',
-      sub: '#ffcfe5',
+      main: "#f2aacb",
+      sub: "#ffcfe5",
     },
     chart: {
-      main: '#51b5ff',
-      sub: '#8ec9f5',
+      main: "#51b5ff",
+      sub: "#8ec9f5",
     },
     ...grayScale,
   },
@@ -52,19 +54,24 @@ const toki = {
 
 const booki = {
   color: {
-    main: '#8ad10a',
-    sub: '#ade051',
+    main: "#8ad10a",
+    sub: "#ade051",
     character: {
-      main: '#b1d66e',
-      sub: '#d9edb4',
+      main: "#b1d66e",
+      sub: "#d9edb4",
     },
     chart: {
-      main: '#51b5ff',
-      sub: '#8ec9f5',
+      main: "#51b5ff",
+      sub: "#8ec9f5",
     },
     ...grayScale,
   },
 };
+
+const { width, height } = Dimensions.get("window");
+
+export const WIDTH = width / 375;
+export const HEIGHT = height / 812;
 
 export const theme = {
   toki,

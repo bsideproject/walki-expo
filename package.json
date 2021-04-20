@@ -1,6 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "apollo:codegen": "rimraf __generated__ && apollo client:codegen __generated__ --target=typescript --outputFlat",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",

@@ -1,22 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { theme } from "../../../styles/theme";
+import { useQuery } from "@apollo/client";
+import {
+  getReport,
+  getReportVariables,
+} from "../../../__generated__/getReport";
+import { GET_REPORT_QUERY } from "../../../queries";
 
 export const Graph = () => {
+  const { data } = useQuery<getReport, getReportVariables>(GET_REPORT_QUERY, {
+    variables: {
+      yearMonth: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+      },
+    },
+  });
+
+  const [stepFill, setStepFill] = useState(0);
+  const [challengeFill, setChallengeFill] = useState(0);
+
+  useEffect(() => {
+    if (
+      typeof data?.getReport?.stepAchievement === "number" &&
+      typeof data.getReport.stepGoal === "number"
+    ) {
+      setStepFill(
+        (data.getReport.stepAchievement / data.getReport.stepGoal) * 100
+      );
+    }
+    if (
+      typeof data?.getReport?.challengeAchievement === "number" &&
+      typeof data.getReport.challengeGoal === "number"
+    ) {
+      setChallengeFill(
+        (data.getReport.challengeAchievement / data.getReport.challengeGoal) *
+          100
+      );
+    }
+  }, [data]);
+
   return (
     <Container>
       <Title>이번달도 토키와 함께 목표를 이뤄봐요!</Title>
       <GraphContainer>
         <Info>
           <InfoTitle>걸음 수</InfoTitle>
-          <StepContent>90,000 0 300,000 걸음</StepContent>
+          <StepContent>
+            {data?.getReport?.stepAchievement} / {data?.getReport?.stepGoal}
+            걸음
+          </StepContent>
 
           <InfoTitle>달성률</InfoTitle>
-          <CompletedContent>70 / 100 %</CompletedContent>
+          <CompletedContent>{challengeFill} / 100 %</CompletedContent>
 
           <InfoTitle>달성일 수</InfoTitle>
-          <DayContent>15 / 20 일</DayContent>
+          <DayContent>
+            {data?.getReport?.challengeAchievement} /{" "}
+            {data?.getReport?.challengeGoal} 일
+          </DayContent>
         </Info>
         <GraphBody>
           <AnimatedCircularProgress
@@ -26,7 +70,7 @@ export const Graph = () => {
             backgroundColor={`${theme.toki.color.character.sub}60`}
             rotation={0}
             lineCap="round"
-            fill={70}
+            fill={stepFill}
             duration={2000}
           >
             {() => (
@@ -37,7 +81,7 @@ export const Graph = () => {
                 backgroundColor={`${theme.toki.color.chart.sub}60`}
                 rotation={0}
                 lineCap="round"
-                fill={70}
+                fill={challengeFill}
                 duration={2000}
               >
                 {() => (
@@ -48,7 +92,7 @@ export const Graph = () => {
                     backgroundColor={`${theme.booki.color.character.sub}60`}
                     rotation={0}
                     lineCap="round"
-                    fill={70}
+                    fill={challengeFill}
                     duration={2000}
                   />
                 )}
