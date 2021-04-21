@@ -8,7 +8,7 @@ import { IAuthProps } from "../../navigators/AuthStackNavi";
  * @param goNext
  */
 const ConfigScreen = ({ navigation }: IAuthProps) => {
-  return <ConfigContainer goNext={() => navigation.push("Coach")} />;
+  return <ConfigContainer  goNext={() => navigation.push("Coach")}/>;
 };
 
 export default ConfigScreen;
