@@ -14,3 +14,11 @@ export const GET_REPORT_QUERY = gql`
     }
   }
 `;
+export const GET_TOKEN_QUERY = gql`
+  query getToken($social: Social!, $token: String!) {
+    signIn(social: $social, token: $token) {
+      accessToken
+      __typename
+    }
+  }
+`;

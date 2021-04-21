@@ -4,8 +4,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedbackProps,
 } from "react-native";
-import AppleLogo from "../../assets/icons/logo/apple.svg";
-import KakaoLogo from "../../assets/icons/logo/kakao.svg";
+import { SvgXml } from "react-native-svg";
+import { icons } from "../../styles/icons";
 
 interface ILoginButtonProps extends TouchableWithoutFeedbackProps {
   type: "apple" | "kakao";
@@ -26,11 +26,11 @@ const LoginButton: React.FC<ILoginButtonProps> = ({ type, onPress }) => {
         flexDirection: "row",
       }}
     >
-      {/* {type === "apple" ? (
-        <AppleLogo width={24} height={24} />
+      {type === "apple" ? (
+        <SvgXml xml={icons.logo.apple} />
       ) : (
-        <KakaoLogo width={24} height={24} />
-      )} */}
+        <SvgXml xml={icons.logo.kakao} />
+      )}
       <Text
         numberOfLines={1}
         adjustsFontSizeToFit
