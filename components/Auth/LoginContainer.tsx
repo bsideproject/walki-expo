@@ -12,7 +12,7 @@ import {
   getTokenVariables,
 } from "../../__generated__/getToken";
 import { Social } from "../../__generated__/globalTypes";
-
+import { tokenVar } from "../../common/apollo";
 
 /**
  * 로그인 버튼
@@ -20,16 +20,22 @@ import { Social } from "../../__generated__/globalTypes";
  * @param setCurrIndex
  */
 const LoginContainer = ({ goNext }: INaviProps) => {
-  const { data ,loading} = useQuery<getToken, getTokenVariables>(GET_TOKEN_QUERY, {
-    variables: {
-      social:Social.APPLE, token:'0'
-    },
-  });
+  const { data, loading } = useQuery<getToken, getTokenVariables>(
+    GET_TOKEN_QUERY,
+    {
+      variables: {
+        social: Social.APPLE,
+        token: "0",
+      },
+    }
+  );
 
   useEffect(() => {
     console.log("GET_ACCESS_TOKEN", data);
+    if (data?.signIn?.accessToken) {
+      tokenVar(data.signIn.accessToken);
+    }
   }, [data]);
-  
 
   return (
     <BottomContainer>
