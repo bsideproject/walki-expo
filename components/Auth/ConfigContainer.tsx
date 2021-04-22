@@ -58,6 +58,7 @@ export default ConfigContainer;
 
 const Container = styled.View`
   flex: 1;
+  padding-top: 16px;
   background-color: ${({ theme }) => theme.color.white};
 `;
 const ButtonWrapper = styled.View`
