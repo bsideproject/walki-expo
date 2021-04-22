@@ -13,6 +13,7 @@ import {
 } from "../../__generated__/getToken";
 import { Social } from "../../__generated__/globalTypes";
 import { tokenVar } from "../../common/apollo";
+import AsyncStorage from "@react-native-community/async-storage";
 
 /**
  * 로그인 버튼
@@ -31,8 +32,8 @@ const LoginContainer = ({ goNext }: INaviProps) => {
   );
 
   useEffect(() => {
-    console.log("GET_ACCESS_TOKEN", data);
     if (data?.signIn?.accessToken) {
+      AsyncStorage.setItem('token', data.signIn.accessToken);
       tokenVar(data.signIn.accessToken);
     }
   }, [data]);

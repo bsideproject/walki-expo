@@ -18,13 +18,7 @@ import { icons } from "../styles/icons";
 const Stack = createStackNavigator();
 
 export const AuthStackNavi = () => {
-  const CommonHeader = {
-    headerLeft: (props: StackHeaderLeftButtonProps) => (
-      <View style={{ paddingLeft: 18 }}>
-        <SvgXml xml={icons.chevron.left} />
-      </View>
-    ),
-  };
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -40,22 +34,46 @@ export const AuthStackNavi = () => {
       <Stack.Screen
         name="Coach"
         component={CoachConfigScreen}
-        options={CommonHeader}
+        options={({ navigation, route }) => ({
+          headerLeft: (props: StackHeaderLeftButtonProps) => (
+            <View style={{ paddingLeft: 18 }}>
+              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Config")}/>
+            </View>
+          ),
+        })}
       />
       <Stack.Screen
         name="Challenge"
         component={ChallengeConfigScreen}
-        options={CommonHeader}
+        options={({ navigation, route }) => ({
+          headerLeft: (props: StackHeaderLeftButtonProps) => (
+            <View style={{ paddingLeft: 18 }}>
+              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Coach")}/>
+            </View>
+          ),
+        })}
       />
       <Stack.Screen
         name="Alarm"
         component={AlarmConfigScreen}
-        options={CommonHeader}
+        options={({ navigation, route }) => ({
+          headerLeft: (props: StackHeaderLeftButtonProps) => (
+            <View style={{ paddingLeft: 18 }}>
+              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Challenge")}/>
+            </View>
+          ),
+        })}
       />
       <Stack.Screen
         name="Start"
         component={StartScreen}
-        options={CommonHeader}
+        options={({ navigation, route }) => ({
+          headerLeft: (props: StackHeaderLeftButtonProps) => (
+            <View style={{ paddingLeft: 18 }}>
+              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Alarm")}/>
+            </View>
+          ),
+        })}
       />
       <Stack.Screen
         name="Home"
