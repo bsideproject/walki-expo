@@ -18,11 +18,11 @@ import { icons } from "../styles/icons";
 const Stack = createStackNavigator();
 
 export const AuthStackNavi = () => {
-
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
+          height: 110,
           shadowColor: "transparent",
           backgroundColor: "#fff",
         },
@@ -37,7 +37,10 @@ export const AuthStackNavi = () => {
         options={({ navigation, route }) => ({
           headerLeft: (props: StackHeaderLeftButtonProps) => (
             <View style={{ paddingLeft: 18 }}>
-              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Config")}/>
+              <SvgXml
+                xml={icons.chevron.left}
+                onPress={() => navigation.navigate("Config")}
+              />
             </View>
           ),
         })}
@@ -48,7 +51,10 @@ export const AuthStackNavi = () => {
         options={({ navigation, route }) => ({
           headerLeft: (props: StackHeaderLeftButtonProps) => (
             <View style={{ paddingLeft: 18 }}>
-              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Coach")}/>
+              <SvgXml
+                xml={icons.chevron.left}
+                onPress={() => navigation.navigate("Coach")}
+              />
             </View>
           ),
         })}
@@ -59,7 +65,10 @@ export const AuthStackNavi = () => {
         options={({ navigation, route }) => ({
           headerLeft: (props: StackHeaderLeftButtonProps) => (
             <View style={{ paddingLeft: 18 }}>
-              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Challenge")}/>
+              <SvgXml
+                xml={icons.chevron.left}
+                onPress={() => navigation.navigate("Challenge")}
+              />
             </View>
           ),
         })}
@@ -70,7 +79,10 @@ export const AuthStackNavi = () => {
         options={({ navigation, route }) => ({
           headerLeft: (props: StackHeaderLeftButtonProps) => (
             <View style={{ paddingLeft: 18 }}>
-              <SvgXml xml={icons.chevron.left} onPress={() =>  navigation.navigate("Alarm")}/>
+              <SvgXml
+                xml={icons.chevron.left}
+                onPress={() => navigation.navigate("Alarm")}
+              />
             </View>
           ),
         })}
