@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/native";
 import { SafeLayout } from "../../layouts/SafeLayout";
 import { Header } from "../../components/Main/Home/Header";
@@ -6,7 +6,7 @@ import { Info } from "../../components/Main/Home/Info";
 import { CircularProgress } from "../../components/Main/Home/CircularProgress";
 import { Button } from "../../components/Button";
 import { RefreshControl } from "react-native";
-import { Pedometer } from "expo-sensors";
+import Pedometer from "@t2tx/react-native-universal-pedometer";
 
 const HomeScreen = () => {
   const [currentStepCount, setCurrentStepCount] = useState(0);
@@ -20,14 +20,6 @@ const HomeScreen = () => {
     setRefreshing(true);
     setCurrentDate(new Date());
     if (isStarted) {
-      await Pedometer.getStepCountAsync(startDate, new Date()).then(
-        result => {
-          setCurrentStepCount(result.steps);
-        },
-        error => {
-          console.log(error);
-        }
-      );
     }
     setRefreshing(false);
   }, [isStarted, startDate]);
@@ -36,8 +28,20 @@ const HomeScreen = () => {
     if (!isStarted) {
       setIsStarted(true);
       setStartDate(new Date());
+      Pedometer.startPedometerUpdatesFromDate(
+        new Date().setHours(0, 0, 0, 0),
+        data => {
+          setCurrentStepCount(data?.numberOfSteps || 1);
+        }
+      );
     }
   }, [isStarted]);
+
+  useEffect(() => {
+    Pedometer.isStepCountingAvailable((error, result) => {
+      console.log(error, result);
+    });
+  }, []);
 
   return (
     <SafeLayout>
