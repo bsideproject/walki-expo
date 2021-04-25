@@ -4,7 +4,7 @@ import { Alert, Text } from "react-native";
 import { INaviProps } from "../../navigators/AuthStackNavi";
 import TextLink from "../../components/TextLink";
 import LoginButton from "./LoginButton";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { GET_TOKEN_QUERY } from "../../queries";
 import {
   getToken,
@@ -28,15 +28,10 @@ import {
 const LoginContainer = ({ goNext }: INaviProps) => {
   const [socialType, setSocialType] = React.useState<Social>(Social.KAKAO);
   const [socialToken, setSocialToken] = React.useState<string>("");
-  const { data, loading } = useQuery<getToken, getTokenVariables>(
-    GET_TOKEN_QUERY,
-    {
-      variables: {
-        social: socialType,
-        token: socialToken,
-      },
-    }
-  );
+  const [getTokenData, { loading, data }] = useLazyQuery<
+    getToken,
+    getTokenVariables
+  >(GET_TOKEN_QUERY);
 
   useEffect(() => {
     if (data?.signIn?.accessToken) {
@@ -50,14 +45,14 @@ const LoginContainer = ({ goNext }: INaviProps) => {
   const onPressKakaoLogin = useCallback(async (): Promise<void> => {
     setSocialType(Social.KAKAO);
     login().then((token: KakaoOAuthToken) => {
-      setSocialToken(token.accessToken);
+      getTokenData({
+        variables: { social: Social.KAKAO, token: token.accessToken },
+      });
     });
   }, []);
 
   const onAppleButtonPress = useCallback(async () => {
-    setSocialType(Social.APPLE);
     try {
-      // Start the sign-in request
       const appleAuthRequestResponse: AppleRequestResponse = await appleAuth.performRequest(
         {
           requestedOperation: appleAuth.Operation.LOGIN,
@@ -72,7 +67,12 @@ const LoginContainer = ({ goNext }: INaviProps) => {
       if (credentialState === appleAuth.State.AUTHORIZED) {
         console.log("user is authenticated", appleAuthRequestResponse);
         if (appleAuthRequestResponse.identityToken) {
-          setSocialToken(appleAuthRequestResponse.identityToken);
+          getTokenData({
+            variables: {
+              social: Social.APPLE,
+              token: appleAuthRequestResponse.identityToken,
+            },
+          });
         }
       }
     } catch (error) {
