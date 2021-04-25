@@ -26,12 +26,9 @@ import {
  * @param setCurrIndex
  */
 const LoginContainer = ({ goNext }: INaviProps) => {
-  const [socialType, setSocialType] = React.useState<Social>(Social.KAKAO);
-  const [socialToken, setSocialToken] = React.useState<string>("");
-  const [getTokenData, { loading, data }] = useLazyQuery<
-    getToken,
-    getTokenVariables
-  >(GET_TOKEN_QUERY);
+  const [getTokenData, { data }] = useLazyQuery<getToken, getTokenVariables>(
+    GET_TOKEN_QUERY
+  );
 
   useEffect(() => {
     if (data?.signIn?.accessToken) {
@@ -43,7 +40,6 @@ const LoginContainer = ({ goNext }: INaviProps) => {
   }, [data]);
 
   const onPressKakaoLogin = useCallback(async (): Promise<void> => {
-    setSocialType(Social.KAKAO);
     login().then((token: KakaoOAuthToken) => {
       getTokenData({
         variables: { social: Social.KAKAO, token: token.accessToken },
