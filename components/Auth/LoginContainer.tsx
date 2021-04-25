@@ -14,6 +14,11 @@ import {
 import { Social } from "../../__generated__/globalTypes";
 import { tokenVar } from "../../common/apollo";
 import AsyncStorage from "@react-native-community/async-storage";
+import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
+import {
+  appleAuth,
+  AppleRequestResponse,
+} from "@invertase/react-native-apple-authentication";
 
 /**
  * 로그인 버튼
@@ -21,38 +26,69 @@ import AsyncStorage from "@react-native-community/async-storage";
  * @param setCurrIndex
  */
 const LoginContainer = ({ goNext }: INaviProps) => {
+  const [socialType, setSocialType] = React.useState<Social>(Social.KAKAO);
+  const [socialToken, setSocialToken] = React.useState<string>("");
   const { data, loading } = useQuery<getToken, getTokenVariables>(
     GET_TOKEN_QUERY,
     {
       variables: {
-        social: Social.APPLE,
-        token: "0",
+        social: socialType,
+        token: socialToken,
       },
     }
   );
 
   useEffect(() => {
     if (data?.signIn?.accessToken) {
-      AsyncStorage.setItem('token', data.signIn.accessToken);
+      AsyncStorage.setItem("token", data.signIn.accessToken);
       tokenVar(data.signIn.accessToken);
+      // 페이지 이동
+      if (typeof goNext === "function") goNext();
     }
   }, [data]);
+
+  const onPressKakaoLogin = useCallback(async (): Promise<void> => {
+    setSocialType(Social.KAKAO);
+    login().then((token: KakaoOAuthToken) => {
+      setSocialToken(token.accessToken);
+    });
+  }, []);
+
+  const onAppleButtonPress = useCallback(async () => {
+    setSocialType(Social.APPLE);
+    try {
+      // Start the sign-in request
+      const appleAuthRequestResponse: AppleRequestResponse = await appleAuth.performRequest(
+        {
+          requestedOperation: appleAuth.Operation.LOGIN,
+          requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+        }
+      );
+      // get current authentication state for user
+      const credentialState = await appleAuth.getCredentialStateForUser(
+        appleAuthRequestResponse.user
+      );
+      // use credentialState response to ensure the user is authenticated
+      if (credentialState === appleAuth.State.AUTHORIZED) {
+        console.log("user is authenticated", appleAuthRequestResponse);
+        if (appleAuthRequestResponse.identityToken) {
+          setSocialToken(appleAuthRequestResponse.identityToken);
+        }
+      }
+    } catch (error) {
+      if (error.code === appleAuth.Error.CANCELED) {
+        // login canceled
+      } else {
+        // login error
+      }
+    }
+  }, []);
 
   return (
     <BottomContainer>
       <LoginButtonWrapper>
-        <LoginButton
-          type="kakao"
-          onPress={() => {
-            if (typeof goNext === "function") goNext();
-          }}
-        />
-        <LoginButton
-          type="apple"
-          onPress={() => {
-            if (typeof goNext === "function") goNext();
-          }}
-        />
+        <LoginButton type="kakao" onPress={onPressKakaoLogin} />
+        <LoginButton type="apple" onPress={onAppleButtonPress} />
 
         <Text
           numberOfLines={2}
