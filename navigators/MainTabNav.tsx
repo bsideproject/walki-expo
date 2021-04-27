@@ -6,14 +6,13 @@ import RankingScreen from "../screens/main/Ranking";
 
 const MainTab = createBottomTabNavigator();
 
-export const MainTabNavi = () => {
+export const MainTabNav = () => {
   return (
     <MainTab.Navigator
       tabBarOptions={{
         style: {
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
-          marginTop: -16,
           borderWidth: 0.5,
           borderTopWidth: 0.5,
           borderColor: "gray",

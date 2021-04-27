@@ -1,19 +1,22 @@
-import React from 'react';
-import styled from '@emotion/native';
+import React from "react";
+import styled from "@emotion/native";
+import { ActivityIndicator } from "react-native";
 
-export type ButtonType = 'primary' | 'secondary' | 'text';
+export type ButtonType = "primary" | "secondary" | "text";
 
 interface IProps {
   text: string;
   type?: ButtonType;
   disabled?: boolean;
+  loading?: boolean;
   onPress?: () => void;
 }
 
 export const Button: React.FC<IProps> = ({
   text,
-  type = 'primary',
+  type = "primary",
   disabled = false,
+  loading = false,
   onPress,
 }) => {
   return (
@@ -21,8 +24,9 @@ export const Button: React.FC<IProps> = ({
       type={type}
       activeOpacity={0.6}
       disabled={disabled}
-      onPress={onPress}>
-      <Text>{text}</Text>
+      onPress={onPress}
+    >
+      {loading ? <ActivityIndicator color="white" /> : <Text>{text}</Text>}
     </Container>
   );
 };
@@ -35,10 +39,10 @@ const Container = styled.TouchableOpacity<{ type: ButtonType }>`
   border-radius: 8px;
   background-color: ${({ type, theme, disabled }) =>
     disabled
-      ? type === 'primary'
+      ? type === "primary"
         ? `${theme.color.main}30`
         : `${theme.color.gray1}30`
-      : type === 'primary'
+      : type === "primary"
       ? theme.color.main
       : theme.color.gray1};
 `;

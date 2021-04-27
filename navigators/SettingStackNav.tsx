@@ -6,7 +6,7 @@ import MyAccountScreen from "../screens/setting/MyAccount";
 
 const Stack = createStackNavigator();
 
-export const SettingStack = () => {
+export const SettingStackNav = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { client, isLoggedInVar } from "./common/apollo";
 import { theme } from "./styles/theme";
 import { Platform, StatusBar } from "react-native";
-import { MainTabNavi } from "./navigators/MainTabNavi";
+import { MainStackNav } from "./navigators/MainStackNav";
 import { AuthStackNavi } from "./navigators/AuthStackNavi";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -14,7 +14,7 @@ const App = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
 
   useEffect(() => {
-    AsyncStorage.getItem('token').then((value) => setMemberCheck(true))
+    AsyncStorage.getItem("token").then(value => setMemberCheck(true));
   }, []);
 
   return (
@@ -22,7 +22,7 @@ const App = () => {
       <ApolloProvider client={client}>
         <NavigationContainer>
           <StatusBar hidden={Platform.OS === "android"} />
-          {isLoggedIn ? <MainTabNavi /> : <AuthStackNavi />}
+          {isLoggedIn ? <MainStackNav /> : <AuthStackNavi />}
         </NavigationContainer>
       </ApolloProvider>
     </ThemeProvider>

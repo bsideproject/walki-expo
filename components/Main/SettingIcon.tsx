@@ -7,14 +7,14 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 type MainStackNavigationProp = StackNavigationProp<
   MainStackParamList,
-  "MainTabs"
+  "MainTabNav"
 >;
 
 export const SettingIcon = () => {
   const navigation = useNavigation<MainStackNavigationProp>();
 
   const goToSetting = useCallback(() => {
-    navigation.navigate("SettingStack");
+    navigation.navigate("SettingStackNav");
   }, []);
 
   return (

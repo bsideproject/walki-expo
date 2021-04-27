@@ -22,3 +22,21 @@ export const GET_TOKEN_QUERY = gql`
     }
   }
 `;
+
+export const GET_MEMBER_QUERY = gql`
+  query getMember {
+    getMember {
+      id
+      name
+    }
+  }
+`;
+
+export const PUT_MEMBER_MUTATION = gql`
+  mutation putMember($member: MemberInput) {
+    putMember(member: $member) {
+      id
+      name
+    }
+  }
+`;
