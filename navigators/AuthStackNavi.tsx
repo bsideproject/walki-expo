@@ -5,7 +5,6 @@ import {
   StackNavigationProp,
 } from "@react-navigation/stack";
 import { View } from "react-native";
-import { MainTabNavi } from "./MainTabNavi";
 import LoginScreen from "../screens/auth/Login";
 import ConfigScreen from "../screens/auth/Config";
 import CoachConfigScreen from "../screens/auth/CoachConfig";
@@ -86,13 +85,6 @@ export const AuthStackNavi = () => {
             </View>
           ),
         })}
-      />
-      <Stack.Screen
-        name="Home"
-        component={MainTabNavi}
-        options={{
-          headerShown: false,
-        }}
       />
     </Stack.Navigator>
   );

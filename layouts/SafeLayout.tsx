@@ -1,11 +1,18 @@
-import React from 'react';
-import styled from '@emotion/native';
+import React from "react";
+import styled from "@emotion/native";
 
-export const SafeLayout: React.FC = ({ children }) => {
-  return <Container>{children}</Container>;
+interface SafeLayoutProps {
+  backgroundColor?: string;
+}
+
+export const SafeLayout: React.FC<SafeLayoutProps> = ({
+  children,
+  backgroundColor = "#f3f3f3",
+}) => {
+  return <Container backgroundColor={backgroundColor}>{children}</Container>;
 };
 
-const Container = styled.SafeAreaView`
+const Container = styled.SafeAreaView<{ backgroundColor: string }>`
   flex: 1;
-  background-color: #f3f3f3;
+  background-color: ${props => props.backgroundColor};
 `;
