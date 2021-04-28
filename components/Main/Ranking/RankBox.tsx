@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/native";
+import dayjs from "dayjs";
 
 interface IRankBoxProps {
   prevDay?: boolean;
@@ -8,9 +9,13 @@ interface IRankBoxProps {
 export const RankBox: React.VFC<IRankBoxProps> = ({ prevDay = false }) => {
   return (
     <Container prevDay={prevDay}>
-      <DateText>4/4</DateText>
+      <DateText>
+        {prevDay
+          ? dayjs(new Date()).add(-1, "day").format("MM/DD")
+          : dayjs(new Date()).add(-2, "day").format("MM/DD")}
+      </DateText>
       <RankTextContainer>
-        <RankNumber prevDay={prevDay}>84</RankNumber>
+        <RankNumber prevDay={prevDay}>0</RankNumber>
         <RankText>위</RankText>
       </RankTextContainer>
     </Container>
@@ -26,6 +31,8 @@ const Container = styled.View<{ prevDay: boolean }>`
   justify-content: center;
   align-items: center;
   margin-right: 8px;
+
+  elevation: 2;
 `;
 
 const DateText = styled.Text`

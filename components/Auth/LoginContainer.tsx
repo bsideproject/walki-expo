@@ -33,7 +33,7 @@ const LoginContainer = ({ goNext }: INaviProps) => {
 
   useEffect(() => {
     if (data?.signIn?.accessToken) {
-      AsyncStorage.setItem('token', data.signIn.accessToken);
+      AsyncStorage.setItem("token", data.signIn.accessToken);
       tokenVar(data.signIn.accessToken);
     }
   }, [data]);

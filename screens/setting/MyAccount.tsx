@@ -2,17 +2,17 @@ import React, { useCallback, useState } from "react";
 import { Header } from "../../components/Setting/Header";
 import styled from "@emotion/native";
 import { SafeLayout } from "../../layouts/SafeLayout";
-import { useMutation, useQuery } from "@apollo/client";
-import { getMember } from "../../__generated__/getMember";
-import { GET_MEMBER_QUERY, PUT_MEMBER_MUTATION } from "../../queries";
+import { useMutation } from "@apollo/client";
+import { PUT_MEMBER_MUTATION } from "../../queries";
 import { Button } from "../../components/Button";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { putMember, putMemberVariables } from "../../__generated__/putMember";
 import TextButton from "../../components/TextButton";
 import { isLoggedInVar } from "../../common/apollo";
+import { useMe } from "../../hooks/useMe";
 
 const MyAccountScreen = () => {
-  const { data } = useQuery<getMember>(GET_MEMBER_QUERY);
+  const { data } = useMe();
   const [name, setName] = useState(data?.getMember?.name || "");
   const onChangeTextName = useCallback((text: string) => {
     setName(text);
@@ -44,7 +44,13 @@ const MyAccountScreen = () => {
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={dismissKeyboard}>
         <Body>
           <Title>내 계정</Title>
-          <Avatar source={require("../../assets/images/avatar.png")} />
+          <Avatar
+            source={
+              data?.getMember?.profileImage
+                ? { uri: data.getMember.profileImage }
+                : require("../../assets/images/avatar.png")
+            }
+          />
           <Name value={name} onChangeText={onChangeTextName} />
           <SaveButton>
             <Button

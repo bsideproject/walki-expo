@@ -14,6 +14,7 @@ export enum Social {
 
 export interface MemberInput {
   name?: string | null;
+  coachId?: any | null;
 }
 
 export interface YearMonthInput {

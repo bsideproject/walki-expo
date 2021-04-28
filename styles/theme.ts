@@ -25,7 +25,7 @@ declare module "@emotion/react" {
   }
 }
 
-const grayScale = {
+export const grayScale = {
   black: "#000000",
   gray1: "#333333",
   gray2: "#4f4f4f",
