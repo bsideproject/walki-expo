@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <resources>
   <string name="app_name">walki</string>
+  <string name="kakao_app_key">9ed125321a882ab21f4f1c408223af27</string>
 </resources>
