@@ -22,3 +22,21 @@ export const GET_TOKEN_QUERY = gql`
     }
   }
 `;
+
+export const PUT_MEMBER_MUTATION = gql`
+  mutation putMember($member: MemberInput) {
+    putMember(member: $member) {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_MY_RANKINGS_QUERY = gql`
+  query getMyRankings($start: LocalDate!, $end: LocalDate!) {
+    getMyRankings(start: $start, end: $end) {
+      number
+      challengeDate
+    }
+  }
+`;

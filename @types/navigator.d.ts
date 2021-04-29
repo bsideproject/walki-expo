@@ -19,6 +19,6 @@ type SettingStackParamList = {
 };
 
 type MainStackParamList = {
-  MainTabs: undefined;
-  SettingStack: undefined;
+  MainTabNav: undefined;
+  SettingStackNav: undefined;
 };

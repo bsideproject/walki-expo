@@ -12,6 +12,11 @@ export enum Social {
   KAKAO = "KAKAO",
 }
 
+export interface MemberInput {
+  name?: string | null;
+  coachId?: any | null;
+}
+
 export interface YearMonthInput {
   month: number;
   year: number;

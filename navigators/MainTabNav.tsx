@@ -3,21 +3,20 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/main/Home";
 import ReportScreen from "../screens/main/Report";
 import RankingScreen from "../screens/main/Ranking";
+import { grayScale } from "../styles/theme";
 
 const MainTab = createBottomTabNavigator();
 
-export const MainTabNavi = () => {
+export const MainTabNav = () => {
   return (
     <MainTab.Navigator
       tabBarOptions={{
         style: {
           borderTopLeftRadius: 16,
           borderTopRightRadius: 16,
-          marginTop: -16,
-          borderWidth: 0.5,
-          borderTopWidth: 0.5,
-          borderColor: "gray",
-          borderTopColor: "gray",
+          borderWidth: 1,
+          borderTopWidth: 1,
+          borderColor: grayScale.gray5,
         },
       }}
     >

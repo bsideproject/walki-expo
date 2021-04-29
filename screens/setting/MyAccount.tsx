@@ -1,13 +1,118 @@
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useCallback, useState } from "react";
 import { Header } from "../../components/Setting/Header";
+import styled from "@emotion/native";
+import { SafeLayout } from "../../layouts/SafeLayout";
+import { useMutation } from "@apollo/client";
+import { PUT_MEMBER_MUTATION } from "../../queries";
+import { Button } from "../../components/Button";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { putMember, putMemberVariables } from "../../__generated__/putMember";
+import TextButton from "../../components/TextButton";
+import { isLoggedInVar } from "../../common/apollo";
+import { useMe } from "../../hooks/useMe";
 
 const MyAccountScreen = () => {
+  const { data } = useMe();
+  const [name, setName] = useState(data?.getMember?.name || "");
+  const onChangeTextName = useCallback((text: string) => {
+    setName(text);
+  }, []);
+
+  const dismissKeyboard = useCallback(() => {
+    Keyboard.dismiss();
+  }, [Keyboard]);
+
+  const [putMember, { loading: putMemberLoading }] = useMutation<
+    putMember,
+    putMemberVariables
+  >(PUT_MEMBER_MUTATION);
+
+  const onSubmit = useCallback(() => {
+    if (name.trim() === "") {
+      return;
+    }
+    putMember({ variables: { member: { name } } });
+  }, [name]);
+
+  const onPressLogout = useCallback(() => {
+    isLoggedInVar(false);
+  }, []);
+
   return (
-    <SafeAreaView>
+    <SafeLayout backgroundColor="white">
       <Header hasBack />
-    </SafeAreaView>
+      <TouchableWithoutFeedback style={{ flex: 1 }} onPress={dismissKeyboard}>
+        <Body>
+          <Title>내 계정</Title>
+          <Avatar
+            source={
+              data?.getMember?.profileImage
+                ? { uri: data.getMember.profileImage }
+                : require("../../assets/images/avatar.png")
+            }
+          />
+          <Name value={name} onChangeText={onChangeTextName} />
+          <SaveButton>
+            <Button
+              text="완료"
+              type="secondary"
+              disabled={name === data?.getMember?.name || name.trim() === ""}
+              onPress={onSubmit}
+              loading={putMemberLoading}
+            />
+          </SaveButton>
+          <LogoutButton>
+            <TextButton onPress={onPressLogout}>로그아웃</TextButton>
+          </LogoutButton>
+        </Body>
+      </TouchableWithoutFeedback>
+    </SafeLayout>
   );
 };
 
 export default MyAccountScreen;
+
+const Body = styled.View`
+  padding: 0px 16px;
+`;
+
+const Title = styled.Text`
+  font-weight: 600;
+  font-size: 24px;
+  margin: 16px 0px;
+
+  color: ${props => props.theme.color.gray1};
+`;
+
+const Avatar = styled.Image`
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+
+  align-self: center;
+
+  margin-bottom: 24px;
+`;
+
+const Name = styled.TextInput`
+  color: ${props => props.theme.color.gray2};
+
+  font-size: 16px;
+  line-height: 19px;
+
+  border-width: 1px;
+  border-radius: 8px;
+
+  margin: 0px 22px;
+  margin-bottom: 22px;
+  padding: 14px 15px;
+`;
+
+const SaveButton = styled.View`
+  padding: 0px 22px;
+  margin-bottom: 22px;
+`;
+
+const LogoutButton = styled.View`
+  align-self: center;
+`;
