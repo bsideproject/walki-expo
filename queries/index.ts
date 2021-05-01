@@ -14,15 +14,19 @@ export const GET_REPORT_QUERY = gql`
     }
   }
 `;
-export const GET_TOKEN_QUERY = gql`
-  query getToken($social: Social!, $token: String!) {
+export const SIGNIN_QUERY = gql`
+  query SignIn($social: Social!, $token: String!) {
     signIn(social: $social, token: $token) {
       accessToken
       __typename
     }
   }
 `;
-
+export const SIGNUP_MUTATION = gql`
+  mutation SignUp($social: Social!, $token: String!) {
+    signUp(social: $social, token: $token)
+  }
+`;
 export const PUT_MEMBER_MUTATION = gql`
   mutation putMember($member: MemberInput) {
     putMember(member: $member) {

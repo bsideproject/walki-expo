@@ -6,19 +6,14 @@
 import { Social } from "./globalTypes";
 
 // ====================================================
-// GraphQL query operation: getToken
+// GraphQL mutation operation: SignUp
 // ====================================================
 
-export interface getToken_signIn {
-  __typename: "SignInResult";
-  accessToken: string | null;
+export interface SignUp {
+  signUp: boolean | null;
 }
 
-export interface getToken {
-  signIn: getToken_signIn | null;
-}
-
-export interface getTokenVariables {
+export interface SignUpVariables {
   social: Social;
   token: string;
 }

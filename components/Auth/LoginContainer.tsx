@@ -1,19 +1,17 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/native";
 import { Alert, Text } from "react-native";
 import { INaviProps } from "../../navigators/AuthStackNavi";
 import TextLink from "../../components/TextLink";
 import LoginButton from "./LoginButton";
-import { useQuery } from "@apollo/client";
-import { GET_TOKEN_QUERY } from "../../queries";
-import {
-  getToken,
-  getToken_signIn,
-  getTokenVariables,
-} from "../../__generated__/getToken";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { SIGNIN_QUERY, SIGNUP_MUTATION } from "../../queries";
+import { SignIn, SignInVariables } from "../../__generated__/SignIn";
+import { SignUp, SignUpVariables } from "../../__generated__/SignUp";
 import { Social } from "../../__generated__/globalTypes";
 import { tokenVar } from "../../common/apollo";
 import AsyncStorage from "@react-native-community/async-storage";
+import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
 
 /**
  * 로그인 버튼
@@ -21,38 +19,44 @@ import AsyncStorage from "@react-native-community/async-storage";
  * @param setCurrIndex
  */
 const LoginContainer = ({ goNext }: INaviProps) => {
-  const { data, loading } = useQuery<getToken, getTokenVariables>(
-    GET_TOKEN_QUERY,
-    {
-      variables: {
-        social: Social.APPLE,
-        token: "0",
-      },
-    }
+  const [signUp, { data: signUpData }] = useMutation<SignUp, SignUpVariables>(
+    SIGNUP_MUTATION
+  );
+  const [signIn, { data: signInData }] = useLazyQuery<SignIn, SignInVariables>(
+    SIGNIN_QUERY
   );
 
   useEffect(() => {
-    if (data?.signIn?.accessToken) {
-      AsyncStorage.setItem("token", data.signIn.accessToken);
-      tokenVar(data.signIn.accessToken);
+    console.log("signInData : " + signInData);
+    if (signInData?.signIn?.accessToken) {
+      AsyncStorage.setItem("token", signInData.signIn.accessToken);
+      tokenVar(signInData.signIn.accessToken);
+      // 페이지 이동
+      if (typeof goNext === "function") goNext();
     }
-  }, [data]);
+  }, [signInData]);
+
+  const onPressKakaoLogin = useCallback(async (): Promise<void> => {
+    login()
+      .then((token: KakaoOAuthToken) => {
+        signUp({
+          variables: { social: Social.KAKAO, token: token.accessToken },
+        })
+          .then((r) => console.log("signUpSuccess: " + r))
+          .catch((e) => console.log("signUpError: " + e))
+          .finally(() => {
+            signIn({
+              variables: { social: Social.KAKAO, token: token.accessToken },
+            });
+          });
+      })
+      .catch((e) => console.log("onPressKakaoLogin error", e));
+  }, []);
 
   return (
     <BottomContainer>
       <LoginButtonWrapper>
-        <LoginButton
-          type="kakao"
-          onPress={() => {
-            if (typeof goNext === "function") goNext();
-          }}
-        />
-        <LoginButton
-          type="apple"
-          onPress={() => {
-            if (typeof goNext === "function") goNext();
-          }}
-        />
+        <LoginButton type="kakao" onPress={onPressKakaoLogin} />
 
         <Text
           numberOfLines={2}

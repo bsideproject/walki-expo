@@ -21,11 +21,15 @@
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+  <uses-permission android:name="android.permission.INTERNET" /> <!-- 인터넷 권한 추가 -->
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:theme="@style/AppTheme">
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="40.0.0"/>
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="true"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="9ed125321a882ab21f4f1c408223af27" /> <!-- 네이티브 앱 키 설정 -->
     <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -39,5 +43,16 @@
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
+    <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+      <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+
+          <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+          <data android:host="oauth"
+              android:scheme="kakao9ed125321a882ab21f4f1c408223af27" />
+      </intent-filter>
+    </activity>
   </application>
 </manifest>

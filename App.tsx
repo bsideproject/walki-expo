@@ -13,7 +13,7 @@ const App = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
 
   useEffect(() => {
-    AsyncStorage.getItem("token").then(value => setMemberCheck(true));
+    AsyncStorage.getItem("token").then((value) => setMemberCheck(true));
   }, []);
 
   return (
