@@ -23,9 +23,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.yajasoo.walki</string>
+				<string>kakao9ed125321a882ab21f4f1c408223af27</string>
 			</array>
 		</dict>
 	</array>
