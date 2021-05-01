@@ -4,7 +4,7 @@ import {
   StackHeaderLeftButtonProps,
   StackNavigationProp,
 } from "@react-navigation/stack";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import LoginScreen from "../screens/auth/Login";
 import ConfigScreen from "../screens/auth/Config";
 import CoachConfigScreen from "../screens/auth/CoachConfig";
@@ -20,12 +20,13 @@ export const AuthStackNavi = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        cardShadowEnabled: true,
+        headerTintColor: "transparent",
         headerStyle: {
-          height: 110,
-          shadowColor: "transparent",
-          backgroundColor: "#fff",
+          height: Platform.OS === "ios" ? 60 : 95,
+          elevation: 0, // remove shadow on Android
+          shadowOpacity: 0, // remove shadow on iOS
         },
-        headerTintColor: "#fff",
       }}
     >
       <Stack.Screen name="Onboarding" component={LoginScreen} />

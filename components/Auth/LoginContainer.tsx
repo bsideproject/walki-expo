@@ -9,7 +9,7 @@ import { SIGNIN_QUERY, SIGNUP_MUTATION } from "../../queries";
 import { SignIn, SignInVariables } from "../../__generated__/SignIn";
 import { SignUp, SignUpVariables } from "../../__generated__/SignUp";
 import { Social } from "../../__generated__/globalTypes";
-import { tokenVar } from "../../common/apollo";
+import { tokenVar, isLoggedInVar } from "../../common/apollo";
 import AsyncStorage from "@react-native-community/async-storage";
 import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
 

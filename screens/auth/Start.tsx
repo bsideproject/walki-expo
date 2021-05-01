@@ -9,7 +9,6 @@ const StartScreen = ({ navigation }: IAuthProps) => {
     <SafeLayout>
       <StartContainer
         goNext={() => {
-          navigation.push("Home");
           isLoggedInVar(true);
         }}
       />
