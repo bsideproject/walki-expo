@@ -12,6 +12,12 @@ export enum Social {
   KAKAO = "KAKAO",
 }
 
+export interface ChallengeInput {
+  challengeDate: any;
+  step?: number | null;
+  stepGoal?: number | null;
+}
+
 export interface MemberInput {
   name?: string | null;
   coachId?: any | null;

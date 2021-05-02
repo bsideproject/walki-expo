@@ -7,11 +7,15 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
+import { getCoaches_getCoaches } from "../__generated__/getCoaches";
 
 export const isLoggedInVar = makeVar(false);
 export const tokenVar = makeVar(
   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE4ODgzODc4LCJleHAiOjE2MTg5NzAyNzh9.04wrofdHjtLiWEt0vxnTi-GTCTrvxW6uLQTGzC6eSTw"
 );
+export const coachVar = makeVar("");
+export const challengeVar = makeVar(0);
+export const alarmVar = makeVar("");
 
 const httpLink = createHttpLink({
   uri: "http://api-walki-dev.ap-northeast-2.elasticbeanstalk.com/graphql",

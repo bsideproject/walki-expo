@@ -1,5 +1,14 @@
 import { gql } from "@apollo/client";
 
+export const GET_COACHES_QUERY = gql`
+  query getCoaches {
+    getCoaches {
+      id
+      name
+      description
+    }
+  }
+`;
 export const GET_REPORT_QUERY = gql`
   query getReport($yearMonth: YearMonthInput!) {
     getReport(yearMonth: $yearMonth) {
@@ -25,6 +34,15 @@ export const SIGNIN_QUERY = gql`
 export const SIGNUP_MUTATION = gql`
   mutation SignUp($social: Social!, $token: String!) {
     signUp(social: $social, token: $token)
+  }
+`;
+export const PUT_CHALLENGE_MUTATION = gql`
+  mutation putChallenge($challenge: ChallengeInput) {
+    putChallenge(challenge: $challenge) {
+      challengeDate
+      step
+      stepGoal
+    }
   }
 `;
 export const PUT_MEMBER_MUTATION = gql`

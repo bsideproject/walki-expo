@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/native";
-import { Text } from "react-native";
+import { Text, TextInput, View } from "react-native";
+import TextLink from "../../components/TextLink";
 import { Button } from "../../components/Button";
 
 import { INaviProps } from "../../navigators/AuthStackNavi";
@@ -48,6 +49,15 @@ const AlarmContainer = ({ goNext }: INaviProps) => {
             }}
             type="secondary"
           />
+          <View style={{ marginTop: 20 }}>
+            <TextLink
+              onPress={() => {
+                if (typeof goNext === "function") goNext();
+              }}
+            >
+              나중에 설정할래요
+            </TextLink>
+          </View>
         </ButtonWrapper>
       </BottomContainer>
     </Container>
@@ -61,7 +71,8 @@ const Container = styled.View`
   background-color: ${({ theme }) => theme.color.white};
 `;
 const ButtonWrapper = styled.View`
-  margin: 75px 37px;
+  margin: 35px;
+  align-items: center;
 `;
 const BottomContainer = styled.View`
   position: absolute;

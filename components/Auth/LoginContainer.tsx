@@ -27,8 +27,8 @@ const LoginContainer = ({ goNext }: INaviProps) => {
   );
 
   useEffect(() => {
-    console.log("signInData : " + signInData);
     if (signInData?.signIn?.accessToken) {
+      console.log("signIn Success : " + signInData.signIn.accessToken);
       AsyncStorage.setItem("token", signInData.signIn.accessToken);
       tokenVar(signInData.signIn.accessToken);
       // 페이지 이동

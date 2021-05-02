@@ -17,15 +17,17 @@ import { icons } from "../styles/icons";
 const Stack = createStackNavigator();
 
 export const AuthStackNavi = () => {
+  console.log(Platform);
   return (
     <Stack.Navigator
       screenOptions={{
         cardShadowEnabled: true,
         headerTintColor: "transparent",
         headerStyle: {
-          height: Platform.OS === "ios" ? 60 : 95,
+          height: Platform.OS === "ios" ? 80 : 95,
           elevation: 0, // remove shadow on Android
           shadowOpacity: 0, // remove shadow on iOS
+          backgroundColor: "transparents",
         },
       }}
     >
