@@ -113,12 +113,6 @@ const CoachContainer = ({ goNext }: INaviProps) => {
     [selectedCoachIndex]
   );
 
-  const onPressSelect = useCallback(() => {
-    // TODO: 코치선택 데이터 저장
-    console.log(selectedCoachIndex);
-    if (typeof goNext === "function") goNext();
-  }, [selectedCoachIndex]);
-
   return (
     <>
       {coachesData && Array.isArray(coachesData.getCoaches) && (
@@ -174,7 +168,7 @@ const CoachContainer = ({ goNext }: INaviProps) => {
                   selectedCoachIndex
                 ];
                 putMember({
-                  variables: { member: { coachId: selectedCoach.id } },
+                  variables: { member: { coachId: 1 } },
                 })
                   .then((res) => {
                     AsyncStorage.setItem("coach", selectedCoach.name as string);

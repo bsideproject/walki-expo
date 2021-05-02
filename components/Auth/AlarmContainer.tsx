@@ -5,6 +5,7 @@ import TextLink from "../../components/TextLink";
 import { Button } from "../../components/Button";
 
 import { INaviProps } from "../../navigators/AuthStackNavi";
+import TimePicker from "../TimePicker";
 /**
  * 알람설정
  * @param goNext
@@ -40,6 +41,7 @@ const AlarmContainer = ({ goNext }: INaviProps) => {
       >
         {`매일 목표 걸음 수를 입력할 시간을 설정해볼까요?\n당신을 응원하기 위해 토키가 매일 알림을\n보내드려요! 시간은 나중에 변경할 수 있어요. `}
       </Text>
+      {/* <TimePicker /> */}
       <BottomContainer>
         <ButtonWrapper>
           <Button
