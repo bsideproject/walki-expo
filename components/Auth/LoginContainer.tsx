@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "@emotion/native";
-import { Alert, Text } from "react-native";
+import { Alert, Text, Platform } from "react-native";
 import { INaviProps } from "../../navigators/AuthStackNavi";
 import TextLink from "../../components/TextLink";
 import LoginButton from "./LoginButton";
@@ -57,6 +57,9 @@ const LoginContainer = ({ goNext }: INaviProps) => {
     <BottomContainer>
       <LoginButtonWrapper>
         <LoginButton type="kakao" onPress={onPressKakaoLogin} />
+        {Platform.OS === "ios" && (
+          <LoginButton type="apple" onPress={onPressKakaoLogin} />
+        )}
 
         <Text
           numberOfLines={2}

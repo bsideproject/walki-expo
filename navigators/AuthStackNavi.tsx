@@ -61,7 +61,7 @@ export const AuthStackNavi = () => {
           ),
         })}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Alarm"
         component={AlarmConfigScreen}
         options={({ navigation, route }) => ({
@@ -74,7 +74,7 @@ export const AuthStackNavi = () => {
             </View>
           ),
         })}
-      />
+      /> */}
       <Stack.Screen
         name="Start"
         component={StartScreen}
@@ -83,7 +83,8 @@ export const AuthStackNavi = () => {
             <View style={{ paddingLeft: 18 }}>
               <SvgXml
                 xml={icons.chevron.left}
-                onPress={() => navigation.navigate("Alarm")}
+                // onPress={() => navigation.navigate("Alarm")}
+                onPress={() => navigation.navigate("Coach")}
               />
             </View>
           ),
