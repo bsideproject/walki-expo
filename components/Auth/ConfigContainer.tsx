@@ -62,7 +62,7 @@ const Container = styled.View`
   background-color: ${({ theme }) => theme.color.white};
 `;
 const ButtonWrapper = styled.View`
-  margin: 75px 37px;
+  margin: 35px;
 `;
 const BottomContainer = styled.View`
   position: absolute;

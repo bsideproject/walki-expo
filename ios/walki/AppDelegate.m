@@ -4,6 +4,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+#import <RNKakaoLogins.h>
 
 #import <UMCore/UMModuleRegistry.h>
 #import <UMReactNativeAdapter/UMNativeModulesProxy.h>
@@ -98,6 +99,9 @@ static void InitializeFlipper(UIApplication *application) {
 
 // Linking API
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  if([RNKakaoLogins isKakaoTalkLoginUrl:url]) {
+     return [RNKakaoLogins handleOpenUrl: url];
+  }
   return [RCTLinkingManager application:application openURL:url options:options];
 }
 

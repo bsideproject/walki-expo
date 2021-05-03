@@ -4,7 +4,7 @@ import {
   StackHeaderLeftButtonProps,
   StackNavigationProp,
 } from "@react-navigation/stack";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import LoginScreen from "../screens/auth/Login";
 import ConfigScreen from "../screens/auth/Config";
 import CoachConfigScreen from "../screens/auth/CoachConfig";
@@ -17,15 +17,18 @@ import { icons } from "../styles/icons";
 const Stack = createStackNavigator();
 
 export const AuthStackNavi = () => {
+  console.log(Platform);
   return (
     <Stack.Navigator
       screenOptions={{
+        cardShadowEnabled: true,
+        headerTintColor: "transparent",
         headerStyle: {
-          height: 110,
-          shadowColor: "transparent",
-          backgroundColor: "#fff",
+          height: Platform.OS === "ios" ? 80 : 95,
+          elevation: 0, // remove shadow on Android
+          shadowOpacity: 0, // remove shadow on iOS
+          backgroundColor: "transparents",
         },
-        headerTintColor: "#fff",
       }}
     >
       <Stack.Screen name="Onboarding" component={LoginScreen} />
@@ -58,7 +61,7 @@ export const AuthStackNavi = () => {
           ),
         })}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Alarm"
         component={AlarmConfigScreen}
         options={({ navigation, route }) => ({
@@ -71,7 +74,7 @@ export const AuthStackNavi = () => {
             </View>
           ),
         })}
-      />
+      /> */}
       <Stack.Screen
         name="Start"
         component={StartScreen}
@@ -80,7 +83,8 @@ export const AuthStackNavi = () => {
             <View style={{ paddingLeft: 18 }}>
               <SvgXml
                 xml={icons.chevron.left}
-                onPress={() => navigation.navigate("Alarm")}
+                // onPress={() => navigation.navigate("Alarm")}
+                onPress={() => navigation.navigate("Coach")}
               />
             </View>
           ),
