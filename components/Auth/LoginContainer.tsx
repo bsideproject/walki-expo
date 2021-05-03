@@ -12,6 +12,7 @@ import { Social } from "../../__generated__/globalTypes";
 import { tokenVar, isLoggedInVar } from "../../common/apollo";
 import AsyncStorage from "@react-native-community/async-storage";
 import { KakaoOAuthToken, login } from "@react-native-seoul/kakao-login";
+import { appleAuth } from "@invertase/react-native-apple-authentication";
 
 /**
  * 로그인 버튼
@@ -52,13 +53,39 @@ const LoginContainer = ({ goNext }: INaviProps) => {
       })
       .catch((e) => console.log("onPressKakaoLogin error", e));
   }, []);
-
+  const onAppleButtonPress = useCallback(async (): Promise<void> => {
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+    const credentialState = await appleAuth.getCredentialStateForUser(
+      appleAuthRequestResponse.user
+    );
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      signUp({
+        variables: {
+          social: Social.APPLE,
+          token: appleAuthRequestResponse.identityToken as string,
+        },
+      })
+        .then((r) => console.log("signUpSuccess: " + r))
+        .catch((e) => console.log("signUpError: " + e))
+        .finally(() => {
+          signIn({
+            variables: {
+              social: Social.APPLE,
+              token: appleAuthRequestResponse.identityToken as string,
+            },
+          });
+        });
+    }
+  }, []);
   return (
     <BottomContainer>
       <LoginButtonWrapper>
         <LoginButton type="kakao" onPress={onPressKakaoLogin} />
         {Platform.OS === "ios" && (
-          <LoginButton type="apple" onPress={onPressKakaoLogin} />
+          <LoginButton type="apple" onPress={onAppleButtonPress} />
         )}
 
         <Text
